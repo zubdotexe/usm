@@ -1,0 +1,29 @@
+1. SELECT DISTINCT multiplier FROM users ORDER BY multiplier DESC; // multiplier k int e convert kora hoyeche
+
+2. SELECT DISTINCT member_since FROM users ORDER BY member_since;
+
+3. SELECT id, email FROM users WHERE email LIKE '%com';
+
+4. SELECT name, email, member_since FROM users ORDER BY member_since DESC LIMIT 5; // asc order e dekhano lagbe na
+
+5. SELECT COUNT(*) AS total_users FROM users;
+
+6. SELECT COUNT(*) AS no_of_users, multiplier FROM users WHERE member_since > '2020-04-30' GROUP BY multiplier;
+
+7. SELECT AVG(LENGTH(name)) AS average_length_of_names FROM users;
+
+8. SELECT COUNT(DISTINCT SUBSTRING_INDEX(email, ".", -1)) FROM users;
+
+9. SELECT * FROM users ORDER BY member_since;
+
+10. SELECT name, influence_count FROM users WHERE influence_count= (SELECT MAX(influence_count) FROM users WHERE member_since > '2020-05-31'); // eta inner clause ta dile jei result ashe oitar justification
+
+11. SELECT name, multiplier FROM users WHERE influence_count < 700000 AND multiplier= (SELECT MAX(multiplier) FROM users WHERE influence_count < 700000); // bakider shathe otwell kibhabe ashe? inner query first e max multiplier ber kore, tarpor jeta result sheta 70000 theke choto hole oita bad diye next highest value ta niye ney, tai taylor ashe result gular shathe, r tai outer query te abar filter kora lage. 
+
+12. SELECT DISTINCT multiplier FROM users WHERE influence_count < 900000;
+
+13. SELECT AVG(influence_count) FROM users WHERE member_since < '2020-06-11';
+
+14. SELECT id, name, email, multiplier FROM users WHERE influence_count BETWEEN 700000 AND 990000 AND member_since > '2020-05-18';
+
+15. SELECT id, name, email, influence_count FROM users WHERE name LIKE '%u%' AND name LIKE'%o%' AND name LIKE'%v%' AND name LIKE'%n%' AND name LIKE '%s%' AND name LIKE '%m%';

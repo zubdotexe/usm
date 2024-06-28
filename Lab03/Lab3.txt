@@ -1,0 +1,30 @@
+
+1. SELECT first_name, last_name, email, phone_number, hire_date, department_id FROM employees WHERE (hire_date, department_id) IN (SELECT MAX(hire_date), department_id FROM employees GROUP BY department_id);
+
+2. SELECT first_name, last_name, email, phone_number, hire_date, department_id FROM employees WHERE (hire_date, department_id) IN (SELECT MIN(hire_date), department_id FROM employees GROUP BY department_id);
+
+3. SELECT first_name, last_name, employee_id, phone_number, salary, department_id FROM employees WHERE (department_id, salary) IN (SELECT department_id, MIN(salary) FROM employees GROUP BY department_id);
+
+4. SELECT first_name, last_name, employee_id, commission_pct, department_id FROM employees WHERE department_id = 7 AND commission_pct < ALL (SELECT commission_pct FROM employees WHERE department_id = 5);
+
+5. SELECT department_id, COUNT(*) AS total_no_of_employees FROM employees GROUP BY department_id;
+
+6. SELECT first_name, last_name, employee_id, email, salary, department_id FROM employees WHERE hire_date < '2020-01-01';
+
+7. SELECT first_name, last_name, employee_id, email, salary, department_id FROM employees WHERE salary = (SELECT MAX(salary) FROM employees WHERE manager_id = 'abcd998773');
+
+8. SELECT department_id FROM employees WHERE department_id NOT IN (SELECT department_id FROM employees WHERE salary >= 30000) GROUP BY department_id;
+
+9. SELECT department_id, job_id, commission_pct FROM employees E1 WHERE EXISTS (SELECT * FROM employees E2 WHERE E1.department_id = E2.department_id AND E1.job_id != E2.job_id AND E1.commission_pct < E2.commission_pct) GROUP BY department_id;  
+
+10. SELECT first_name, last_name, employee_id, email, salary, department_id, commission_pct from employees where (manager_id, commission_pct) in (select manager_id, min(commission_pct) from employees group by manager_id);
+
+11. SELECT COUNT(*) FROM employees WHERE employee_id IN (SELECT DISTINCT manager_id FROM employees);
+
+12. SELECT department_id, job_id, salary FROM employees E1 WHERE EXISTS (SELECT * FROM employees E2 WHERE E1.manager_id = E2.manager_id AND E1.job_id != E2.job_id AND E1.salary < E2.salary) GROUP BY department_id;
+
+13. SELECT manager_id FROM employees E1 WHERE EXISTS (SELECT * FROM employees E2 WHERE E1.manager_id = E2.manager_id AND E1.salary > 1500) GROUP BY manager_id; 
+
+14. SELECT manager_id FROM employees E1 WHERE EXISTS (SELECT * FROM employees E2 WHERE E1.manager_id = E2.manager_id AND E1.commission_pct < 15.25) GROUP BY manager_id;
+
+15. SELECT manager_id FROM employees WHERE manager_id NOT IN (SELECT manager_id FROM employees WHERE salary <= 3500) GROUP BY department_id;
